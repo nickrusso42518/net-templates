@@ -77,7 +77,7 @@ ip sla 30
 ip sla schedule 30 life forever start-time now
 !
 ip sla 32
- udp-echo 192.0.2.1 3032 source-ip 203.0.113.2
+ udp-echo 192.0.2.1 5032 source-ip 203.0.113.2
   tos 128
   tag RT INTER - CS4
 ip sla schedule 32 life forever start-time now
@@ -89,7 +89,7 @@ ip sla 34
 ip sla schedule 34 life forever start-time now
 !
 ip sla 36
- udp-echo 192.0.2.1 3036 source-ip 203.0.113.2
+ udp-echo 192.0.2.1 5036 source-ip 203.0.113.2
   tos 144
   tag MM CONF MEDIUM DROP - AF42
 ip sla schedule 36 life forever start-time now

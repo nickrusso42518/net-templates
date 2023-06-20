@@ -1,0 +1,29 @@
+flow record FLOW_RECORD_IPV6
+ description CLASSIC NETFLOW 7-TUPLE MATCHING
+ match ipv6 source address
+ match ipv6 destination address
+ match ipv6 protocol
+ match ipv6 dscp
+ match transport destination-port
+ match transport source-port
+ match interface input
+ collect counter bytes
+ collect counter packets
+!
+flow exporter FLOW_EXPORTER_IPV6_A
+ description NEW YORK CITY, USA
+ destination 2001:db8::a
+ source Loopback0
+ dscp 16
+ transport udp 2055
+flow exporter FLOW_EXPORTER_IPV6_B
+ description LOS ANGELES, USA
+ destination 2001:db8::b
+ source Loopback0
+ dscp 16
+ transport udp 2055
+!
+flow monitor FLOW_MONITOR_IPV6
+ exporter FLOW_EXPORTER_IPV6_A
+ exporter FLOW_EXPORTER_IPV6_B
+ record FLOW_RECORD_IPV6
