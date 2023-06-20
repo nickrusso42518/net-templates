@@ -1,0 +1,65 @@
+QOS_ROUTER#show policy-map interface GigabitEthernet2
+ GigabitEthernet2
+  Service-policy : PMAP_QUEUE
+
+    queue stats for all priority classes:
+      Queueing
+      queue limit 512 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 22/1628
+
+    Class-map: CMAP_INELASTIC (match-any)
+      22 packets, 1628 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match: class-map match-all CMAP_VOIP
+        Match:  dscp ef (46)
+      Match: class-map match-all CMAP_SIGNALING
+        Match:  dscp cs5 (40)
+      Match: class-map match-all CMAP_RT_INTER
+        Match:  dscp cs4 (32)
+      Match: class-map match-all CMAP_BC_VIDEO
+        Match:  dscp cs3 (24)
+      Priority: 30% (300000 kbps), burst bytes 7500000, b/w exceed drops: 0
+
+
+    Class-map: CMAP_NC_OAM (match-any)
+      10 packets, 808 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match: class-map match-all CMAP_NETCONTROL
+        Match:  dscp cs6 (48) cs7 (56)
+      Match: class-map match-all CMAP_OAM
+        Match:  dscp cs2 (16)
+      Queueing
+      queue limit 64 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 10/808
+      bandwidth 10% (100000 kbps)
+
+    Class-map: class-default (match-any)
+      144 packets, 11387 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match: any
+      Queueing
+      queue limit 249 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 139/9602
+      bandwidth 60% (600000 kbps)
+        Exp-weight-constant: 9 (1/512)
+        Mean queue depth: 0 packets
+        dscp       Transmitted         Random drop      Tail drop          Minimum        Maximum     Mark
+                pkts/bytes            pkts/bytes       pkts/bytes          thresh         thresh     prob
+
+        default       15/1002            0/0              0/0                 62           124  1/10
+        cs1           15/1002            0/0              0/0                 69           124  1/10
+        af11          15/1002            0/0              0/0                108           124  1/10
+        af12          15/1002            0/0              0/0                 93           124  1/10
+        af13          15/1002            0/0              0/0                 77           124  1/10
+        af21          15/1002            0/0              0/0                108           124  1/10
+        af22          15/1002            0/0              0/0                 93           124  1/10
+        af23          10/668             0/0              0/0                 77           124  1/10
+        af31           4/320             0/0              0/0                108           124  1/10
+        af32           4/320             0/0              0/0                 93           124  1/10
+        af33           4/320             0/0              0/0                 77           124  1/10
+        af41           4/320             0/0              0/0                108           124  1/10
+        af42           4/320             0/0              0/0                 93           124  1/10
+        af43           4/320             0/0              0/0                 77           124  1/10

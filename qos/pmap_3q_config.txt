@@ -1,0 +1,20 @@
+class-map match-any CMAP_NC_OAM_3Q
+  descript NETWORK MGMT AND CONTROL
+ match class-map CMAP_NETCONTROL
+ match class-map CMAP_OAM
+!
+class-map match-any CMAP_INELASTIC_3Q
+  description WILL NOT RESPOND TO NETWORK CONDITIONS
+ match class-map CMAP_VOIP
+ match class-map CMAP_SIGNALING
+ match class-map CMAP_RT_INTER
+ match class-map CMAP_BC_VIDEO
+!
+policy-map PMAP_3Q
+ class CMAP_INELASTIC_3Q
+  priority percent 30
+ class CMAP_NC_OAM_3Q
+  bandwidth percent 10
+ class class-default
+  bandwidth percent 60
+  random-detect dscp-based

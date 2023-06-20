@@ -1,0 +1,19 @@
+RECEIVER#show ip sla responder
+        General IP SLA Responder on Control port 1967
+        General IP SLA Responder on Control V2 port 1167
+General IP SLA Responder is: Enabled
+Number of control message received: 38 Number of errors: 0
+Recent sources:
+        192.0.2.1 A [10:32:14.856 UTC Tue Jun 20 2023]
+        192.0.2.1 A [10:32:14.624 UTC Tue Jun 20 2023]
+        192.0.2.1 A [10:32:14.370 UTC Tue Jun 20 2023]
+        192.0.2.1 A [10:32:14.097 UTC Tue Jun 20 2023]
+        192.0.2.1 A [10:32:13.831 UTC Tue Jun 20 2023]
+Recent error sources:
+
+Number of control v2 message received: 0 Number of errors: 0
+Recent sources:
+Recent error sources:
+
+        Permanent Port IP SLA Responder
+Permanent Port IP SLA Responder is: Disabled

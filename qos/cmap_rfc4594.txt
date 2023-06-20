@@ -1,0 +1,33 @@
+class-map match-all CMAP_NETCONTROL
+  description NETWORK CONTROL PLANE: RFC4594/3.2
+ match dscp cs6 cs7
+class-map match-all CMAP_OAM
+  description OPERATIONS/ADMINISTRATION/MANAGEMENT: RFC4594/3.3
+ match dscp cs2
+class-map match-all CMAP_VOIP
+  description VOICE OVER IP TELEPHONY: RFC4594/4.1
+ match dscp ef
+class-map match-all CMAP_SIGNALING
+  description APPLICATION SIGNALING: RFC4594/4.2
+ match dscp cs5
+class-map match-all CMAP_MM_CONF
+  description MULTIMEDIA CONFERENCING: RFC4594/4.3
+ match dscp af41 af42 af43
+class-map match-all CMAP_RT_INTER
+  description REALTIME INTERACTIVE: RFC4594/4.4
+ match dscp cs4
+class-map match-all CMAP_MM_STREAM
+  description MULTIMEDIA STREAMING: RFC4594/4.5
+ match dscp af31 af32 af33
+class-map match-all CMAP_BC_VIDEO
+  description BROADCAST VIDEO: RFC4594/4.6
+ match dscp cs3
+class-map match-all CMAP_LL_DATA
+  description LOW LATENCY (TRANSACTIONAL) DATA: RFC4594/4.7
+ match dscp af21 af22 af23
+class-map match-all CMAP_HT_DATA
+  description HIGH THROUGHPUT (BULK) DATA: RFC4594/4.8
+ match dscp af11 af12 af13
+class-map match-all CMAP_LP_DATA
+  description LOW PRIORITY (SCAVENGER) DATA: RFC4594/4.10
+ match dscp cs1

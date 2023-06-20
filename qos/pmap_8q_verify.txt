@@ -1,0 +1,126 @@
+QOS_ROUTER#show policy-map interface GigabitEthernet2
+ GigabitEthernet2
+  Service-policy : PMAP_QUEUE
+
+    queue stats for all priority classes:
+      Queueing
+      priority level 1
+      queue limit 512 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 14/1120
+
+    queue stats for all priority classes:
+      Queueing
+      priority level 2
+      queue limit 512 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 28/2240
+
+    Class-map: CMAP_VOIP (match-all)
+      14 packets, 1120 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match:  dscp ef (46)
+      Priority: 10% (100000 kbps), burst bytes 2500000, b/w exceed drops: 0
+
+      Priority Level: 1
+
+    Class-map: CMAP_INELASTIC_VIDEO (match-any)
+      28 packets, 2240 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match: class-map match-all CMAP_RT_INTER
+        Match:  dscp cs4 (32)
+      Match: class-map match-all CMAP_BC_VIDEO
+        Match:  dscp cs3 (24)
+      Priority: 15% (150000 kbps), burst bytes 3750000, b/w exceed drops: 0
+
+      Priority Level: 2
+
+    Class-map: CMAP_NETCONTROL (match-all)
+      14 packets, 1148 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match:  dscp cs6 (48) cs7 (56)
+      Queueing
+      queue limit 64 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 14/1148
+      bandwidth 3% (30000 kbps)
+
+    Class-map: CMAP_OAM (match-all)
+      14 packets, 1120 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match:  dscp cs2 (16)
+      Queueing
+      queue limit 64 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 14/1120
+      bandwidth 7% (70000 kbps)
+
+    Class-map: CMAP_SIGNALING (match-all)
+      35 packets, 2338 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match:  dscp cs5 (40)
+      Queueing
+      queue limit 64 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 35/2338
+      bandwidth 5% (50000 kbps)
+
+    Class-map: CMAP_ELASTIC (match-any)
+      294 packets, 20748 bytes
+      5 minute offered rate 1000 bps, drop rate 0000 bps
+      Match: class-map match-all CMAP_MM_CONF
+        Match:  dscp af41 (34) af42 (36) af43 (38)
+      Match: class-map match-all CMAP_MM_STREAM
+        Match:  dscp af31 (26) af32 (28) af33 (30)
+      Match: class-map match-all CMAP_HT_DATA
+        Match:  dscp af11 (10) af12 (12) af13 (14)
+      Match: class-map match-all CMAP_LL_DATA
+        Match:  dscp af21 (18) af22 (20) af23 (22)
+      Queueing
+      queue limit 145 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 294/20748
+      bandwidth 35% (350000 kbps)
+        Exp-weight-constant: 9 (1/512)
+        Mean queue depth: 0 packets
+        dscp       Transmitted         Random drop      Tail drop          Minimum        Maximum     Mark
+                pkts/bytes            pkts/bytes       pkts/bytes          thresh         thresh     prob
+
+        af11          35/2338            0/0              0/0                 63            72  1/10
+        af12          35/2338            0/0              0/0                 54            72  1/10
+        af13          35/2338            0/0              0/0                 45            72  1/10
+        af21          35/2338            0/0              0/0                 63            72  1/10
+        af22          35/2338            0/0              0/0                 54            72  1/10
+        af23          35/2338            0/0              0/0                 45            72  1/10
+        af31          14/1120            0/0              0/0                 63            72  1/10
+        af32          14/1120            0/0              0/0                 54            72  1/10
+        af33          14/1120            0/0              0/0                 45            72  1/10
+        af41          14/1120            0/0              0/0                 63            72  1/10
+        af42          14/1120            0/0              0/0                 54            72  1/10
+        af43          14/1120            0/0              0/0                 45            72  1/10
+
+    Class-map: CMAP_LP_DATA (match-all)
+      35 packets, 2338 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match:  dscp cs1 (8)
+      Queueing
+      queue limit 64 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 35/2338
+      bandwidth 1% (10000 kbps)
+
+    Class-map: class-default (match-any)
+      48 packets, 6979 bytes
+      5 minute offered rate 0000 bps, drop rate 0000 bps
+      Match: any
+      Queueing
+      queue limit 99 packets
+      (queue depth/total drops/no-buffer drops) 0/0/0
+      (pkts output/bytes output) 35/2338
+      bandwidth 24% (240000 kbps)
+        Exp-weight-constant: 9 (1/512)
+        Mean queue depth: 0 packets
+        dscp       Transmitted         Random drop      Tail drop          Minimum        Maximum     Mark
+                pkts/bytes            pkts/bytes       pkts/bytes          thresh         thresh     prob
+
+        default       35/2338            0/0              0/0                 24            49  1/10

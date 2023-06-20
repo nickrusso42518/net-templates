@@ -1,0 +1,22 @@
+SENDER#show ip sla summary | include ^\*
+*1       tcp-connect 192.0.2.1    RTT=4     OK    12 seconds ago
+*8       tcp-connect 192.0.2.1    RTT=2     OK    12 seconds ago
+*10      tcp-connect 192.0.2.1    RTT=3     OK    11 seconds ago
+*12      tcp-connect 192.0.2.1    RTT=3     OK    11 seconds ago
+*14      tcp-connect 192.0.2.1    RTT=2     OK    11 seconds ago
+*16      udp-echo    192.0.2.1    RTT=2     OK    11 seconds ago
+*18      tcp-connect 192.0.2.1    RTT=3     OK    10 seconds ago
+*20      tcp-connect 192.0.2.1    RTT=3     OK    10 seconds ago
+*22      tcp-connect 192.0.2.1    RTT=4     OK    10 seconds ago
+*24      udp-echo    192.0.2.1    RTT=2     OK    9 seconds ago
+*26      udp-echo    192.0.2.1    RTT=1     OK    9 seconds ago
+*28      udp-echo    192.0.2.1    RTT=1     OK    9 seconds ago
+*30      udp-echo    192.0.2.1    RTT=1     OK    9 seconds ago
+*32      udp-echo    192.0.2.1    RTT=1     OK    8 seconds ago
+*34      udp-echo    192.0.2.1    RTT=1     OK    8 seconds ago
+*36      udp-echo    192.0.2.1    RTT=2     OK    8 seconds ago
+*38      udp-echo    192.0.2.1    RTT=1     OK    8 seconds ago
+*40      tcp-connect 192.0.2.1    RTT=4     OK    7 seconds ago
+*46      udp-echo    192.0.2.1    RTT=1     OK    7 seconds ago
+*48      icmp-echo   192.0.2.1    RTT=2     OK    7 seconds ago
+*56      icmp-echo   192.0.2.1    RTT=1     OK    5 seconds ago

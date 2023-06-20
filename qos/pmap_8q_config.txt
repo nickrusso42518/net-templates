@@ -1,0 +1,31 @@
+class-map match-any CMAP_INELASTIC_VIDEO
+  description WILL NOT RESPOND TO NETWORK CONDITIONS
+ match class-map CMAP_RT_INTER
+ match class-map CMAP_BC_VIDEO
+!
+class-map match-any CMAP_ELASTIC
+  description RESPONDS TO NETWORK CONDITIONS
+ match class-map CMAP_MM_CONF
+ match class-map CMAP_MM_STREAM
+ match class-map CMAP_LL_DATA
+ match class-map CMAP_HT_DATA
+!
+policy-map PMAP_QUEUE
+ class CMAP_VOIP
+  priority level 1 percent 10
+ class CMAP_INELASTIC_VIDEO
+  priority level 2 percent 15
+ class CMAP_NETCONTROL
+  bandwidth percent 3
+ class CMAP_OAM
+  bandwidth percent 7
+ class CMAP_SIGNALING
+  bandwidth percent 5
+ class CMAP_ELASTIC
+  bandwidth percent 35
+  random-detect dscp-based
+ class CMAP_LP_DATA
+  bandwidth percent 1
+ class class-default
+  bandwidth percent 24
+  random-detect dscp-based

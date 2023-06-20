@@ -1,0 +1,125 @@
+ip sla 1
+ tcp-connect 192.0.2.1 5000 source-ip 203.0.113.2
+  tos 0
+  tag BEST EFFORT - DF (CS0)
+ip sla schedule 1 life forever start-time now
+!
+ip sla 8
+ tcp-connect 192.0.2.1 5008 source-ip 203.0.113.2
+  tos 32
+  tag LP DATA - CS1
+ip sla schedule 8 life forever start-time now
+!
+ip sla 10
+ tcp-connect 192.0.2.1 5010 source-ip 203.0.113.2
+  tos 40
+  tag HT DATA LOW DROP - AF11
+ip sla schedule 10 life forever start-time now
+!
+ip sla 12
+ tcp-connect 192.0.2.1 5012 source-ip 203.0.113.2
+  tos 48
+  tag HT DATA MEDIUM DROP - AF12
+ip sla schedule 12 life forever start-time now
+!
+ip sla 14
+ tcp-connect 192.0.2.1 5014 source-ip 203.0.113.2
+  tos 56
+  tag HT DATA HIGH DROP - AF13
+ip sla schedule 14 life forever start-time now
+!
+ip sla 16
+ udp-echo 192.0.2.1 5016 source-ip 203.0.113.2
+  tos 64
+  tag OAM - CS2
+ip sla schedule 16 life forever start-time now
+!
+ip sla 18
+ tcp-connect 192.0.2.1 5018 source-ip 203.0.113.2
+  tos 72
+  tag LL DATA LOW DROP - AF21
+ip sla schedule 18 life forever start-time now
+!
+ip sla 20
+ tcp-connect 192.0.2.1 5020 source-ip 203.0.113.2
+  tos 80
+  tag LL DATA MEDIUM DROP - AF22
+ip sla schedule 20 life forever start-time now
+!
+ip sla 22
+ tcp-connect 192.0.2.1 5022 source-ip 203.0.113.2
+  tos 88
+  tag LL DATA HIGH DROP - AF23
+ip sla schedule 22 life forever start-time now
+!
+ip sla 24
+ udp-echo 192.0.2.1 5024 source-ip 203.0.113.2
+  tos 96
+  tag BC VIDEO - CS3
+ip sla schedule 24 life forever start-time now
+!
+ip sla 26
+ udp-echo 192.0.2.1 5026 source-ip 203.0.113.2
+  tos 104
+  tag MM STREAM LOW DROP - AF31
+ip sla schedule 26 life forever start-time now
+!
+ip sla 28
+ udp-echo 192.0.2.1 5028 source-ip 203.0.113.2
+  tos 112
+  tag MM STREAM MEDIUM DROP - AF32
+ip sla schedule 28 life forever start-time now
+!
+ip sla 30
+ udp-echo 192.0.2.1 5030 source-ip 203.0.113.2
+  tos 120
+  tag MM STREAM HIGH DROP - AF33
+ip sla schedule 30 life forever start-time now
+!
+ip sla 32
+ udp-echo 192.0.2.1 3032 source-ip 203.0.113.2
+  tos 128
+  tag RT INTER - CS4
+ip sla schedule 32 life forever start-time now
+!
+ip sla 34
+ udp-echo 192.0.2.1 5034 source-ip 203.0.113.2
+  tos 136
+  tag MM CONF LOW DROP - AF41
+ip sla schedule 34 life forever start-time now
+!
+ip sla 36
+ udp-echo 192.0.2.1 3036 source-ip 203.0.113.2
+  tos 144
+  tag MM CONF MEDIUM DROP - AF42
+ip sla schedule 36 life forever start-time now
+!
+ip sla 38
+ udp-echo 192.0.2.1 5038 source-ip 203.0.113.2
+  tos 152
+  tag MM CONF HIGH DROP - AF43
+ip sla schedule 38 life forever start-time now
+!
+ip sla 40
+ tcp-connect 192.0.2.1 5040 source-ip 203.0.113.2
+  tos 160
+  tag SIGNALING - CS5
+ip sla schedule 40 life forever start-time now
+!
+ip sla 46
+ udp-echo 192.0.2.1 5046 source-ip 203.0.113.2
+  tos 184
+  tag VOIP - EF
+ip sla schedule 46 life forever start-time now
+!
+ip sla 48
+ icmp-echo 192.0.2.1 source-ip 203.0.113.2
+  tos 192
+  tag NETCONTROL - CS6
+ip sla schedule 48 life forever start-time now
+!
+ip sla 56
+ icmp-echo 192.0.2.1 source-ip 203.0.113.2
+  tos 224
+  tag NETCONTROL - CS7
+ip sla schedule 56 life forever start-time now
