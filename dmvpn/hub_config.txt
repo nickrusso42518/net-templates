@@ -1,0 +1,75 @@
+hostname HUB
+ip domain name njrusmc.net
+!
+crypto logging session
+crypto logging ikev2
+!
+crypto ikev2 proposal IKEV2_PROPOSAL
+ encryption aes-gcm-256
+ prf sha512
+ group 21
+!
+crypto ikev2 policy IKEV2_POLICY
+ match fvrf FVRF
+ proposal IKEV2_PROPOSAL
+!
+crypto ikev2 keyring IKEV2_KEYRING
+ peer INTRADOMAIN
+  identity fqdn domain njrusmc.net
+  pre-shared-key SECRET123
+ !
+!
+crypto ikev2 profile IKEV2_PROFILE
+ match fvrf FVRF
+ match identity remote fqdn domain njrusmc.net
+ identity local fqdn HUB.njrusmc.net
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local IKEV2_KEYRING
+ dpd 20 5 periodic
+!
+crypto ipsec transform-set IPSEC_XFORM esp-gcm 256
+ mode transport
+!
+crypto ipsec profile IPSEC_PROFILE
+ set transform-set IPSEC_XFORM
+ set ikev2-profile IKEV2_PROFILE
+ responder-only
+!
+ip access-list extended ACL_UNDERLAY_IN_V4
+ 10 remark DROP ALL PACKETS WITH IP OPTIONS
+ 10 deny   ip any any option any-options
+ 20 remark ACCEPT IKE (UDP 500), IPSEC (ESP), or NAT-T IPSEC (UDP 4500) TO SELF
+ 20 permit udp any host 203.0.113.1 eq isakmp
+ 30 permit udp any eq isakmp host 203.0.113.1
+ 40 permit udp any host 203.0.113.1 eq non500-isakmp
+ 50 permit udp any eq non500-isakmp host 203.0.113.1
+ 60 permit esp any host 203.0.113.1
+ 70 remark ACCEPT ICMP ECHO REQUESTS OR RESPONSES TO SELF
+ 70 permit icmp any host 203.0.113.1 echo
+ 80 permit icmp any host 203.0.113.1 echo-reply
+ 90 remark DENY ALL OTHER PACKETS
+ 90 deny   ip any any
+!
+interface GigabitEthernet2
+ description DMVPN UNDERLAY (HUB)
+ vrf forwarding FVRF
+ ip address 203.0.113.1 255.255.255.0
+ ip verify unicast source reachable-via rx
+ ip access-group ACL_UNDERLAY_IN_V4 in
+ no shutdown
+!
+interface Tunnel100
+ description DMVPN TUNNEL (HUB)
+ ip address 192.0.2.1 255.255.255.0
+ no ip redirects
+ ip mtu 1460
+ ip nhrp authentication NHRPT100
+ ip nhrp network-id 100
+ ip nhrp redirect
+ ip tcp adjust-mss 1420
+ tunnel source GigabitEthernet2
+ tunnel mode gre multipoint
+ tunnel key 100
+ tunnel vrf FVRF
+ tunnel protection ipsec profile IPSEC_PROFILE

@@ -1,0 +1,65 @@
+HUB#show crypto ikev2 sa
+ IPv4 Crypto IKEv2  SA
+
+Tunnel-id Local                 Remote                fvrf/ivrf            Status
+1         203.0.113.1/500       203.0.113.2/500       FVRF/none            READY
+      Encr: AES-GCM, keysize: 256, PRF: SHA512, Hash: None, DH Grp:21, Auth sign: PSK, Auth verify: PSK
+      Life/Active Time: 86400/351 sec
+
+
+HUB#show crypto ipsec sa
+
+interface: Tunnel100
+    Crypto map tag: Tunnel100-head-0, local addr 203.0.113.1
+
+   protected vrf: (none)
+   local  ident (addr/mask/prot/port): (203.0.113.1/255.255.255.255/47/0)
+   remote ident (addr/mask/prot/port): (203.0.113.2/255.255.255.255/47/0)
+   current_peer 203.0.113.2 port 500
+     PERMIT, flags={origin_is_acl,}
+    #pkts encaps: 14, #pkts encrypt: 14, #pkts digest: 14
+    #pkts decaps: 45, #pkts decrypt: 45, #pkts verify: 45
+    #pkts compressed: 0, #pkts decompressed: 0
+    #pkts not compressed: 0, #pkts compr. failed: 0
+    #pkts not decompressed: 0, #pkts decompress failed: 0
+    #send errors 0, #recv errors 0
+
+     local crypto endpt.: 203.0.113.1, remote crypto endpt.: 203.0.113.2
+     plaintext mtu 1466, path mtu 1500, ip mtu 1500, ip mtu idb GigabitEthernet2.3003
+     current outbound spi: 0x8C122346(2349998918)
+     PFS (Y/N): N, DH group: none
+
+     inbound esp sas:
+      spi: 0x2235DF86(573955974)
+        transform: esp-gcm 256 ,
+        in use settings ={Transport, }
+        conn id: 2001, flow_id: CSR:1, sibling_flags FFFFFFFF80000008, crypto map: Tunnel100-head-0
+         sa timing: remaining key lifetime (k/sec): (4607980/3245)
+        IV size: 8 bytes
+        replay detection support: Y
+        Status: ACTIVE(ACTIVE)
+
+     inbound ah sas:
+
+     inbound pcp sas:
+
+     outbound esp sas:
+      spi: 0x8C122346(2349998918)
+        transform: esp-gcm 256 ,
+        in use settings ={Transport, }
+        conn id: 2002, flow_id: CSR:2, sibling_flags FFFFFFFF80000008, crypto map: Tunnel100-head-0
+         sa timing: remaining key lifetime (k/sec): (4607989/3245)
+        IV size: 8 bytes
+        replay detection support: Y
+        Status: ACTIVE(ACTIVE)
+
+     outbound ah sas:
+
+     outbound pcp sas:
+
+
+HUB#show ip nhrp
+192.0.2.2/32 via 192.0.2.2
+   Tunnel100 created 00:06:49, expire 00:09:50
+   Type: dynamic, Flags: registered nhop
+   NBMA address: 203.0.113.2

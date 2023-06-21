@@ -1,0 +1,74 @@
+hostname SPOKE1
+ip domain name njrusmc.net
+!
+crypto logging session
+crypto logging ikev2
+!
+crypto ikev2 proposal IKEV2_PROPOSAL
+ encryption aes-gcm-256
+ prf sha512
+ group 21
+!
+crypto ikev2 policy IKEV2_POLICY
+ match fvrf FVRF
+ proposal IKEV2_PROPOSAL
+!
+crypto ikev2 keyring IKEV2_KEYRING
+ peer ANY
+  address 0.0.0.0 0.0.0.0
+  pre-shared-key SECRET123
+ !
+!
+crypto ikev2 profile IKEV2_PROFILE
+ match fvrf FVRF
+ match identity remote fqdn domain njrusmc.net
+ identity local fqdn SPOKE1.njrusmc.net
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local IKEV2_KEYRING
+ dpd 20 5 periodic
+!
+crypto ipsec transform-set IPSEC_XFORM esp-gcm 256
+ mode transport
+!
+crypto ipsec profile IPSEC_PROFILE
+ set transform-set IPSEC_XFORM
+ set ikev2-profile IKEV2_PROFILE
+!
+ip access-list extended ACL_UNDERLAY_IN_V4
+ 10 remark DROP ALL PACKETS WITH IP OPTIONS
+ 10 deny   ip any any option any-options
+ 20 remark ACCEPT IKE (UDP 500), IPSEC (ESP), OR NAT-T IPSEC (UDP 4500)
+ 20 permit udp any any eq isakmp
+ 30 permit udp any any eq non500-isakmp
+ 40 permit esp any any
+ 50 remark ACCEPT ICMP ECHO REQUESTS OR RESPONSES
+ 50 permit icmp any any echo
+ 60 permit icmp any any echo-reply
+ 70 remark ACCEPT DHCP SERVER TO CLIENT MESSAGES
+ 70 permit udp any eq bootps any eq bootpc
+ 80 remark DENY ALL OTHER PACKETS
+ 80 deny   ip any any
+!
+interface GigabitEthernet2
+ description DMVPN UNDERLAY (SPOKE)
+ vrf forwarding FVRF
+ ip address dhcp
+ ip access-group ACL_UNDERLAY_IN_V4 in
+ no shutdown
+!
+interface Tunnel100
+ description DMVPN TUNNEL (SPOKE)
+ ip address 192.0.2.2 255.255.255.0
+ no ip redirects
+ ip mtu 1460
+ ip nhrp authentication NHRPT100
+ ip nhrp network-id 100
+ ip nhrp nhs dynamic nbma 203.0.113.1 multicast
+ ip nhrp shortcut
+ ip tcp adjust-mss 1420
+ tunnel source GigabitEthernet2
+ tunnel mode gre multipoint
+ tunnel key 100
+ tunnel vrf FVRF
+ tunnel protection ipsec profile IPSEC_PROFILE
