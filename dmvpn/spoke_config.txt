@@ -1,6 +1,3 @@
-hostname SPOKE1
-ip domain name njrusmc.net
-!
 crypto logging session
 crypto logging ikev2
 !
@@ -18,11 +15,9 @@ crypto ikev2 keyring IKEV2_KEYRING
   address 0.0.0.0 0.0.0.0
   pre-shared-key SECRET123
  !
-!
 crypto ikev2 profile IKEV2_PROFILE
  match fvrf FVRF
- match identity remote fqdn domain njrusmc.net
- identity local fqdn SPOKE1.njrusmc.net
+ match identity remote any
  authentication remote pre-share
  authentication local pre-share
  keyring local IKEV2_KEYRING
