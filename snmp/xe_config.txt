@@ -1,0 +1,21 @@
+ip access-list standard ACL_SNMP_RO
+ remark SNMP POLLING READ-ONLY ACCESS
+ permit 198.51.100.0 0.0.0.255
+ deny   any log
+!
+ip access-list standard ACL_SNMP_RW
+ remark SNMP POLLING READ-WRITE ACCESS
+ permit 203.0.113.0 0.0.0.255
+ deny   any log
+!
+snmp-server user SNMPUSER_RO SNMPGROUP_RO v3 auth sha authPass priv aes 128 privPass
+snmp-server user SNMPUSER_RW SNMPGROUP_RW v3 auth sha authPass priv aes 128 privPass
+snmp-server group SNMPGROUP_RO v3 priv read SNMPVIEW_ALL access ACL_SNMP_RO
+snmp-server group SNMPGROUP_RW v3 priv read SNMPVIEW_ALL write SNMPVIEW_ALL access ACL_SNMP_RW
+snmp-server view SNMPVIEW_ALL iso included
+snmp-server trap-source Loopback0
+snmp-server location Maryland,USA
+snmp-server contact nick@njrusmc.net
+snmp-server enable traps snmp linkdown linkup
+snmp-server host 192.0.2.1 version 3 priv SNMPUSER_RO
+snmp ifmib ifindex persist

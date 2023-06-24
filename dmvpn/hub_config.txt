@@ -57,11 +57,11 @@ interface Tunnel100
  description DMVPN TUNNEL (HUB)
  ip address 192.0.2.1 255.255.255.0
  no ip redirects
- ip mtu 1460
+ ip mtu 1438
  ip nhrp authentication NHRPT100
  ip nhrp network-id 100
  ip nhrp redirect
- ip tcp adjust-mss 1420
+ ip tcp adjust-mss 1398
  tunnel source GigabitEthernet2
  tunnel mode gre multipoint
  tunnel key 100

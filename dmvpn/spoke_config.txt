@@ -56,12 +56,12 @@ interface Tunnel100
  description DMVPN TUNNEL (SPOKE)
  ip address 192.0.2.2 255.255.255.0
  no ip redirects
- ip mtu 1460
+ ip mtu 1438
  ip nhrp authentication NHRPT100
  ip nhrp network-id 100
  ip nhrp nhs dynamic nbma 203.0.113.1 multicast
  ip nhrp shortcut
- ip tcp adjust-mss 1420
+ ip tcp adjust-mss 1398
  tunnel source GigabitEthernet2
  tunnel mode gre multipoint
  tunnel key 100

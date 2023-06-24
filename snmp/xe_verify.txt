@@ -1,0 +1,49 @@
+SNMP_RTR#show snmp user
+
+User name: SNMPUSER_RO
+Engine ID: 800000090300005056BB9680
+storage-type: nonvolatile        active
+Authentication Protocol: SHA
+Privacy Protocol: AES128
+Group-name: SNMPGROUP_RO
+
+User name: SNMPUSER_RW
+Engine ID: 800000090300005056BB9680
+storage-type: nonvolatile        active
+Authentication Protocol: SHA
+Privacy Protocol: AES128
+Group-name: SNMPGROUP_RW
+
+
+SNMP_RTR#show snmp group
+groupname: SNMPGROUP_RO                     security model:v3 priv 
+contextname: <no context specified>         storage-type: nonvolatile
+readview : SNMPVIEW_ALL                     writeview: <no writeview specified>
+notifyview: *tv.FFFFFFFF.FFFFFFFF.FFFFFFFF.F
+row status: active      access-list: ACL_SNMP_RO
+
+groupname: SNMPGROUP_RW                     security model:v3 priv 
+contextname: <no context specified>         storage-type: nonvolatile
+readview : SNMPVIEW_ALL                     writeview: SNMPVIEW_ALL
+notifyview: <no notifyview specified>       
+row status: active      access-list: ACL_SNMP_RW
+
+
+SNMP_RTR#show snmp host
+Notification host: 192.0.2.1    udp-port: 162   type: trap
+user: SNMPUSER_RO       security model: v3 priv
+
+
+SNMP_RTR#show snmp mib ifmib traps | include ifDesc|---|enabled
+     ifDescr                  ifindex    TrapStatus
+---------------------------------------------------
+GigabitEthernet5                 5      enabled
+GigabitEthernet7                 7      enabled
+GigabitEthernet1                 1      enabled
+GigabitEthernet3                 3      enabled
+VoIP-Null0                       8      enabled
+Loopback0                        10     enabled
+Null0                            9      enabled
+GigabitEthernet4                 4      enabled
+GigabitEthernet6                 6      enabled
+GigabitEthernet2                 2      enabled
