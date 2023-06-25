@@ -1,0 +1,11 @@
+interface GigabitEthernet1/0/4
+ description ACCESS PORT - 802.1X - DATA & VOICE
+ switchport access vlan 500
+ switchport mode access
+ switchport nonegotiate
+ switchport voice vlan 501
+ authentication host-mode multi-domain
+ authentication order dot1x mab
+ authentication port-control auto
+ spanning-tree bpduguard enable
+ spanning-tree portfast edge

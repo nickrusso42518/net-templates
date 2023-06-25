@@ -1,0 +1,8 @@
+interface GigabitEthernet1/0/1
+ description ACCESS PORT - PORT SECURITY
+ switchport access vlan 500
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security
+ spanning-tree bpduguard enable
+ spanning-tree portfast edge

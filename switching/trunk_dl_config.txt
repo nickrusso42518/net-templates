@@ -1,0 +1,8 @@
+interface GigabitEthernet1/0/18
+ description TRUNK PORT - STP DOWNLINK
+ switchport trunk allowed vlan 500-509
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 2
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root

@@ -1,0 +1,9 @@
+interface GigabitEthernet1/0/2
+ description ACCESS PORT - 802.1X
+ switchport access vlan 500
+ switchport mode access
+ switchport nonegotiate
+ authentication order dot1x mab
+ authentication port-control auto
+ spanning-tree bpduguard enable
+ spanning-tree portfast edge

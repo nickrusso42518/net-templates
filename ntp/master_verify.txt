@@ -8,4 +8,35 @@ root dispersion is 1939.51 msec, peer dispersion is 1938.47 msec
 loopfilter state is 'CTRL' (Normal Controlled Loop), drift is 0.000000000 s/s
 system poll interval is 16, last update was 4 sec ago.
 
-# tbd
+NTP_MASTER#show ntp associations detail 
+127.127.1.1 configured, ipv4, our_master, sane, valid, stratum 7
+ref ID .LOCL., time E8422558.88B43AD0 (02:30:48.534 UTC Sun Jun 25 2023)
+our mode active, peer mode passive, our poll intvl 16, peer poll intvl 16
+root delay 0.00 msec, root disp 0.00, reach 377, sync dist 2.30
+delay 0.00 msec, offset 0.0000 msec, dispersion 1.20, jitter 0.97 msec
+precision 2**10, version 4
+assoc id 58668, assoc name 127.127.1.1
+assoc in packets 267, assoc out packets 267, assoc error packets 0
+org time E8422558.88B43AD0 (02:30:48.534 UTC Sun Jun 25 2023)
+rec time 00000000.00000000 (00:00:00.000 UTC Mon Jan 1 1900)
+xmt time E8422558.88B43AD0 (02:30:48.534 UTC Sun Jun 25 2023)
+filtdelay =     0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+filtoffset =    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+filterror =     0.97    1.21    1.45    1.69    1.93    2.17    2.41    2.65
+minpoll = 4, maxpoll = 4
+
+10.0.0.2 configured, ipv4, authenticated (' ' reject), authtype (hmac-sha2-256), insane, invalid, stratum 8
+ref ID 127.127.1.1    , time E84224B4.82D0E6C8 (02:28:04.511 UTC Sun Jun 25 2023)
+our mode active, peer mode active, our poll intvl 64, peer poll intvl 64
+root delay 0.00 msec, root disp 2.30, reach 376, sync dist 12.58
+delay 4.00 msec, offset -47721.9999 msec, dispersion 5.55, jitter 0.97 msec
+precision 2**10, version 4
+assoc id 58671, assoc name 10.0.0.1
+assoc in packets 46, assoc out packets 90, assoc error packets 29
+org time E842253F.88B43AD0 (02:30:23.534 UTC Sun Jun 25 2023)
+rec time E84224FF.82D0E6C8 (02:29:19.511 UTC Sun Jun 25 2023)
+xmt time E84224FF.82D0E6C8 (02:29:19.511 UTC Sun Jun 25 2023)
+filtdelay =     5.00    5.00    5.00    6.00    4.00    5.00    5.00    5.00
+filtoffset = -47723. -47722. -47722. -47721. -47721. -47721. -47721. -47720.
+filterror =     1.95    2.97    4.98    5.98    7.02    9.07   10.09   12.13
+minpoll = 6, maxpoll = 10
