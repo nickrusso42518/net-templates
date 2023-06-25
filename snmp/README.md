@@ -1,2 +1,2 @@
 # Simple Network Management Protocol (SNMP) Examples
-Currently focusing on SNMPv3.
+This directory includes SNMPv3 examples for polling and trap operations. It includes a pair of users and groups, one providing read-only (RO) access, and one providing read-write (RW) access. Both use the authPriv model which is most secure. The ACLs provide additional security to determine which SNMP servers (pollers) can utilize which users. I enable basic linkup and linkdown traps, sending them to an SNMP trap listener. Last, the template includes other SNMP informational fields that are commonly specified.

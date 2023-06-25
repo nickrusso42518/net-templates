@@ -1,0 +1,20 @@
+# THIS DEVICE IS 10.0.0.1, AND 10.0.0.2 IS THE OTHER MASTER
+#
+ip access-list standard ACL_NTP_PEER
+ 10 remark ONLY ALLOW MASTERS TO UPDATE ME
+ 10 permit 127.0.0.0 0.255.255.255
+ 20 permit 10.0.0.2
+!
+ip access-list standard ACL_NTP_SERVE
+ 10 permit 10.0.0.0 0.0.0.255
+!
+ntp logging
+ntp max-associations 50
+ntp authentication-key 1 hmac-sha2-256 NTP_AUTH
+ntp authenticate
+ntp trusted-key 1
+ntp source Loopback0
+ntp access-group peer ACL_NTP_PEER
+ntp access-group serve ACL_NTP_SERVE
+ntp master
+ntp peer 10.0.0.2 key 1

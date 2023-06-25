@@ -1,0 +1,43 @@
+NTP_CLIENT#show ntp status 
+Clock is synchronized, stratum 9, reference is 10.0.0.2       
+nominal freq is 250.0000 Hz, actual freq is 249.9993 Hz, precision is 2**10
+ntp uptime is 94500 (1/100 of seconds), resolution is 4016
+reference time is E8421778.624DD400 (01:31:36.384 UTC Sun Jun 25 2023)
+clock offset is 3.0000 msec, root delay is 2.00 msec
+root dispersion is 9.45 msec, peer dispersion is 2.93 msec
+loopfilter state is 'CTRL' (Normal Controlled Loop), drift is 0.000002511 s/s
+system poll interval is 64, last update was 11 sec ago.
+
+
+NTP_CLIENT#show ntp associations detail 
+10.0.0.1 configured, ipv4, authenticated ('+' candidate), authtype (hmac-sha2-256), sane, valid, stratum 8
+ref ID 127.127.1.1    , time E84216D8.88B43AD0 (01:28:56.534 UTC Sun Jun 25 2023)
+our mode client, peer mode server, our poll intvl 64, peer poll intvl 64
+root delay 0.00 msec, root disp 2.22, reach 34, sync dist 9.96
+delay 3.00 msec, offset 1.5000 msec, dispersion 2.65, jitter 0.97 msec
+precision 2**10, version 4
+assoc id 55153, assoc name 10.0.0.1
+assoc in packets 8, assoc out packets 18, assoc error packets 0
+org time E8421764.61CAC190 (01:31:16.382 UTC Sun Jun 25 2023)
+rec time E84216DD.62D0E670 (01:29:01.386 UTC Sun Jun 25 2023)
+xmt time E84216DD.62D0E670 (01:29:01.386 UTC Sun Jun 25 2023)
+filtdelay =     3.00    2.00    2.00    3.00    2.00    2.00    3.00    3.00
+filtoffset =    1.50    2.00    2.00    1.50    2.00    2.00    1.50    1.50
+filterror =     1.95    2.94    3.78    3.81    3.84    3.87    3.90    3.93
+minpoll = 6, maxpoll = 10
+
+10.0.0.2 configured, ipv4, authenticated ('*' sys.peer), authtype (hmac-sha2-256), our_master, sane, valid, stratum 8
+ref ID 127.127.1.1    , time E8421768.88B43AD0 (01:31:20.534 UTC Sun Jun 25 2023)
+our mode client, peer mode server, our poll intvl 64, peer poll intvl 64
+root delay 0.00 msec, root disp 2.39, reach 377, sync dist 7.92
+delay 2.00 msec, offset 3.0000 msec, dispersion 2.93, jitter 1.30 msec
+precision 2**10, version 4
+assoc id 55154, assoc name 10.0.0.2
+assoc in packets 18, assoc out packets 18, assoc error packets 0
+org time 00000000.00000000 (00:00:00.000 UTC Mon Jan 1 1900)
+rec time E8421778.62D0E670 (01:31:36.386 UTC Sun Jun 25 2023)
+xmt time E8421778.62D0E670 (01:31:36.386 UTC Sun Jun 25 2023)
+filtdelay =     2.00    2.00    2.00    3.00    3.00    3.00    2.00    3.00
+filtoffset =    3.00    2.00    2.00    1.50    1.50    1.50    2.00    1.50
+filterror =     1.95    2.97    3.99    5.02    6.01    7.05    8.07    9.07
+minpoll = 6, maxpoll = 10
