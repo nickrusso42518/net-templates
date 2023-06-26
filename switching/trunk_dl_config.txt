@@ -6,3 +6,5 @@ interface GigabitEthernet1/0/18
  switchport mode trunk
  switchport nonegotiate
  spanning-tree guard root
+ ip dhcp snooping trust
+ ip arp inspection trust

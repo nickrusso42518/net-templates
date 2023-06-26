@@ -9,3 +9,4 @@ interface GigabitEthernet1/0/4
  authentication port-control auto
  spanning-tree bpduguard enable
  spanning-tree portfast edge
+ ip verify source

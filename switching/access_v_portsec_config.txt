@@ -9,3 +9,4 @@ interface GigabitEthernet1/0/3
  switchport port-security
  spanning-tree bpduguard enable
  spanning-tree portfast edge
+ ip verify source
