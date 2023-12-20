@@ -4,13 +4,13 @@ ipv6 general-prefix GUA 2001:DB8::/32
 ipv6 unicast-routing
 !
 ipv6 access-list ACL_EXTERNAL_IN_V6
- sequence 10 remark DENY RFC4913 ULA
+ sequence 10 remark DENY RFC4193 ULA
  sequence 20 deny ipv6 FC00::/7 any log
  sequence 30 deny ipv6 any FC00::/7 log
  sequence 40 permit ipv6 any any
 !
 ipv6 access-list ACL_EXTERNAL_OUT_V6
- sequence 10 remark DENY RFC4913 ULA
+ sequence 10 remark DENY RFC4193 ULA
  sequence 20 deny ipv6 FC00::/7 any log
  sequence 30 deny ipv6 any FC00::/7 log
  sequence 40 permit ipv6 any any
