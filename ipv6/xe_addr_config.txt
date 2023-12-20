@@ -1,0 +1,43 @@
+ipv6 nd cache interface-limit 300 log 5
+ipv6 general-prefix ULA FC00:A:B::/48
+ipv6 general-prefix GUA 2001:DB8::/32
+ipv6 unicast-routing
+!
+ipv6 access-list ACL_EXTERNAL_IN_V6
+ sequence 10 remark DENY RFC4913 ULA
+ sequence 20 deny ipv6 FC00::/7 any log
+ sequence 30 deny ipv6 any FC00::/7 log
+ sequence 40 permit ipv6 any any
+!
+ipv6 access-list ACL_EXTERNAL_OUT_V6
+ sequence 10 remark DENY RFC4913 ULA
+ sequence 20 deny ipv6 FC00::/7 any log
+ sequence 30 deny ipv6 any FC00::/7 log
+ sequence 40 permit ipv6 any any
+!
+interface Loopback0
+ description LOOPBACK (GUA OPTIONAL)
+ ipv6 address FE80::1 link-local
+ ipv6 address ULA ::FFFF:1/128
+ ipv6 address GUA ::FFFF:1/128
+!
+interface GigabitEthernet1
+ description CLIENT LAN
+ ipv6 address FE80::1 link-local
+ ipv6 address ULA ::1001:0:0:0:1/64
+ ipv6 address GUA 0:0:1001::1/64
+ ipv6 verify unicast source reachable-via rx
+!
+interface GigabitEthernet2
+ description INTERNAL TRANSIT (ULA OPTIONAL)
+ ipv6 address FE80::1 link-local
+ ipv6 address ULA ::1002:0:0:0:1/127
+ ipv6 nd ra suppress all
+!
+interface GigabitEthernet3
+ description EXTERNAL TRANSIT
+ ipv6 address FE80::1 link-local
+ ipv6 address GUA 0:0:1003::1/127
+ ipv6 nd ra suppress all
+ ipv6 traffic-filter ACL_EXTERNAL_IN_V6 in
+ ipv6 traffic-filter ACL_EXTERNAL_OUT_V6 out

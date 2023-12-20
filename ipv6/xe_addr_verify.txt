@@ -1,0 +1,143 @@
+Cat8000V#show ipv6 general-prefix 
+IPv6 Prefix ULA, acquired via Manual configuration
+  FC00:A:B::/48 Valid lifetime infinite, preferred lifetime infinite
+   GigabitEthernet1 (Address command)
+   GigabitEthernet2 (Address command)
+   Loopback0 (Address command)
+IPv6 Prefix GUA, acquired via Manual configuration
+  2001:DB8::/32 Valid lifetime infinite, preferred lifetime infinite
+   GigabitEthernet1 (Address command)
+   GigabitEthernet3 (Address command)
+   Loopback0 (Address command)
+
+Cat8000V#show ipv6 interface brief
+GigabitEthernet1       [up/up]
+    FE80::1
+    2001:DB8:1001::1
+    FC00:A:B:1001::1
+GigabitEthernet2       [up/up]
+    FE80::1
+    FC00:A:B:1002::1
+GigabitEthernet3       [up/up]
+    FE80::1
+    2001:DB8:1003::1
+Loopback0              [up/up]
+    FE80::1
+    2001:DB8::FFFF:1
+    FC00:A:B::FFFF:1
+
+Cat8000V#show ipv6 interface
+GigabitEthernet1 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1 
+  No Virtual link-local address(es):
+  Description: CLIENT LAN
+  General-prefix in use for addressing
+  Global unicast address(es):
+    2001:DB8:1001::1, subnet is 2001:DB8:1001::/64 
+    FC00:A:B:1001::1, subnet is FC00:A:B:1001::/64 
+  Joined group address(es):
+    FF02::1
+    FF02::1:FF00:1
+  MTU is 1500 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  Input features: Verify Unicast Reverse-Path
+ IPv6 verify source reachable-via rx
+   0 verification drop(s) (process), 0 (CEF)
+   0 suppressed verification drop(s) (process), 0 (CEF)
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND advertised reachable time is 0 (unspecified)
+  ND advertised retransmit interval is 0 (unspecified)
+  ND router advertisements are sent every 200 seconds
+  ND router advertisements live for 1800 seconds
+  ND advertised default router preference is Medium
+  Hosts use stateless autoconfig for addresses.
+
+GigabitEthernet2 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1 
+  No Virtual link-local address(es):
+  Description: INTERNAL TRANSIT
+  General-prefix in use for addressing
+  Global unicast address(es):
+    FC00:A:B:1002::1, subnet is FC00:A:B:1002::/127 
+  Joined group address(es):
+    FF02::1
+    FF02::1:FF00:1
+  MTU is 1500 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND RAs are suppressed (all)
+  Hosts use stateless autoconfig for addresses.
+
+GigabitEthernet3 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1 
+  No Virtual link-local address(es):
+  Description: EXTERNAL TRANSIT
+  General-prefix in use for addressing
+  Global unicast address(es):
+    2001:DB8:1003::1, subnet is 2001:DB8:1003::/127 
+  Joined group address(es):
+    FF02::1
+    FF02::2
+    FF02::1:FF00:1
+  MTU is 1500 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  Input features: Access List
+  Output features: Access List
+  Inbound access list ACL_EXTERNAL_IN_V6
+  Outgoing access list ACL_EXTERNAL_OUT_V6
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND advertised reachable time is 0 (unspecified)
+  ND advertised retransmit interval is 0 (unspecified)
+  ND router advertisements are sent every 200 seconds
+  ND router advertisements live for 1800 seconds
+  ND advertised default router preference is Medium
+  Hosts use stateless autoconfig for addresses.
+
+Loopback0 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1 
+  No Virtual link-local address(es):
+  Description: LOOPBACK
+  General-prefix in use for addressing
+  Global unicast address(es):
+    2001:DB8::FFFF:1, subnet is 2001:DB8::FFFF:1/128 
+    FC00:A:B::FFFF:1, subnet is FC00:A:B::FFFF:1/128 
+  Joined group address(es):
+    FF02::1
+    FF02::2
+    FF02::1:FF00:1
+    FF02::1:FFFF:1
+  MTU is 1514 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  ND DAD is not supported
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND advertised reachable time is 0 (unspecified)
+  ND advertised retransmit interval is 0 (unspecified)
+  ND router advertisements live for 1800 seconds
+  ND advertised default router preference is Medium
+  ND RAs are suppressed (periodic)
+  Hosts use stateless autoconfig for addresses.
+
+Cat8000V#show ipv6 route connected
+LC  2001:DB8::FFFF:1/128 [0/0]
+     via Loopback0, receive
+C   2001:DB8:1001::/64 [0/0]
+     via GigabitEthernet1, directly connected
+C   2001:DB8:1003::/127 [0/0]
+     via GigabitEthernet3, directly connected
+LC  FC00:A:B::FFFF:1/128 [0/0]
+     via Loopback0, receive
+C   FC00:A:B:1001::/64 [0/0]
+     via GigabitEthernet1, directly connected
+C   FC00:A:B:1002::/127 [0/0]
+     via GigabitEthernet2, directly connected
